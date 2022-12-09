@@ -61,6 +61,7 @@ public class TMSimulator {
 								
 								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection
 								tm.addTransition(currState, splitString[0], splitString[1], splitString[2]);
+								
 								last = ((next = reader.readLine()) == null);
 								line = next;
 								currLine++;
