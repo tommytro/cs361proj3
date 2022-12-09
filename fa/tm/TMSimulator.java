@@ -57,6 +57,10 @@ public class TMSimulator {
 							for(int i = 0; i < numSymbols + 1; i++){
 								System.out.println("transition " + (i+1) + " for state " + currState + " is " + line);
 								//add transition using currState as the state to add to
+								String[] splitString = line.split("[,], 0");
+								
+								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection
+								tm.addTransition(currState, splitString[0], splitString[1], splitString[2]);
 								last = ((next = reader.readLine()) == null);
 								line = next;
 								currLine++;
@@ -68,6 +72,7 @@ public class TMSimulator {
 							last = ((next = reader.readLine()) == null);
 							System.out.println("string line: " + line);
 							string = line;
+							tm.addString(string);
 					}
 				}     
 			} finally {
