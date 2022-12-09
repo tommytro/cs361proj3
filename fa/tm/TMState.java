@@ -1,5 +1,6 @@
 package fa.tm;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import fa.State;
@@ -15,7 +16,7 @@ import fa.State;
 public class TMState extends State{
 	
 
-	private HashMap<Character,TMState> delta;//delta
+	private ArrayList<TMTransition> delta = new ArrayList<TMTransition>();//delta
 	private boolean isFinal;//remembers its type
 	
 	/**
@@ -39,8 +40,9 @@ public class TMState extends State{
 	
 	private void initDefault(String name ){
 		this.name = name;
-		delta = new HashMap<Character, TMState>();
+		//delta = new HashMap<Character, TMState>();               //fix
 	}
+	
 	
 	/**
 	 * Accessor for the state type
@@ -55,9 +57,10 @@ public class TMState extends State{
 	 * Add the transition from <code> this </code> object
 	 * @param onSymb the alphabet symbol
 	 * @param toState to DFA state
+	 * @param writeChar
 	 */
-	public void addTransition(char onSymb, TMState toState){
-		delta.put(onSymb, toState);
+	public void addTransition(int currState, int toState, char writeChar, char moveDir){
+		delta.add(new TMTransition(currState, toState, writeChar, moveDir));
 	}
 	
 	/**
@@ -67,12 +70,12 @@ public class TMState extends State{
 	 * @return the new state 
 	 */
 	public TMState getTo(char symb){
-		TMState ret = delta.get(symb);
+		TMState ret = delta.get(symb);                                  //fix
 		if(ret == null){
 			 System.err.println("ERROR: DFAState.getTo(char symb) returns null on " + symb + " from " + name);
 			 System.exit(2);
 			}
-		return delta.get(symb);
+		return delta.get(symb);                                      //fix
 	}
 	
 	

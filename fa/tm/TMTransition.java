@@ -3,29 +3,24 @@ package fa.tm;
  * Defines Transitions for TMSimulator
  * @author Tommy Trovinger & Josh Fenske
  */
-public class TMTransitions {
+public class TMTransition {
     private int currState;
     private int nextState;
-    private int writeSymb;
-    private char direction;
+    private char writeSymb;
+    private char moveDir;
     
     /**
      * default constructor
      * @param currState
      * @param nextState
      * @param writeSymb
-     * @param direction
+     * @param moveDir
      */
-    public TMTransitions(int currState, int nextState, int writeSymb, String direction) {
+    public TMTransition(int currState, int nextState, char writeSymb, char moveDir) {
         this.setCurrState(currState);
         this.setNextState(nextState);
         this.setWrite(writeSymb);
-        if(direction.length() == 0) {
-            this.setDirection('R'); //defaulting to R
-        }else {
-            this.setDirection(direction.charAt(0));
-        }
-          
+        this.setDirection(moveDir);
     }
 
     /**
@@ -66,9 +61,9 @@ public class TMTransitions {
      * Set Direction L or R
      * @param L/R
      */
-    public void setDirection(char direction) {
-        if (direction == 'L' || direction == 'R')
-            this.direction = direction;
+    public void setDirection(char moveDir) {
+        if (moveDir == 'L' || moveDir == 'R')
+            this.moveDir = moveDir;
     }
 
     /**
@@ -76,7 +71,7 @@ public class TMTransitions {
      * @return direction L or R
      */
     public char getDirection() {
-        return direction;
+        return moveDir;
     }
 
     /**

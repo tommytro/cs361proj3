@@ -68,20 +68,21 @@ public class TM {
 		}
 	}
 
-    public void addTransition(String fromState, char onSymb, String toState){
-		TMState from = checkIfExists(fromState);
-		TMState to = checkIfExists(toState);
+    public void addTransition(int currState, String goTo, String writeChar, String moveDir){
+		TMState from = checkIfExists(String.valueOf(currState));
+		TMState to = checkIfExists(goTo);
 		if(from == null){
-			System.err.println("ERROR: No TM state exists with name " + fromState);
+			System.err.println("ERROR: No TM state exists with name " + currState);
 			System.exit(2);
 		} else if (to == null){
-			System.err.println("ERROR: No TM state exists with name " + toState);
+			System.err.println("ERROR: No TM state exists with name " + goTo);
 			System.exit(2);
 		}
-		from.addTransition(onSymb, to);
 		
-		if(!transitionChar.contains(onSymb)){
-			transitionChar.add(onSymb);
+		from.addTransition((char)currState, (char)goTo);
+
+		if(!transitionChar.contains(currState)){
+			transitionChar.add((char)currState);
 		}
 	}
 
@@ -133,5 +134,9 @@ public class TM {
 	public Set<Character> getABC() {
 		return transitionChar;
 	}
+
+
+    public void addString(String string) {
+    }
 }
 
