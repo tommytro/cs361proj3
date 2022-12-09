@@ -1,3 +1,5 @@
 
 .vscode/launch.json
 TMSimulator.class
+fa/tm/TM.class
+fa/tm/TMState.class

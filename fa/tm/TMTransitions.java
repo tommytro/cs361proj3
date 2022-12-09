@@ -1,3 +1,4 @@
+package fa.tm;
 /**
  * Defines Transitions for TMSimulator
  * @author Tommy Trovinger & Josh Fenske
