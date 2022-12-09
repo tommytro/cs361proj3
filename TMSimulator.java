@@ -1,13 +1,16 @@
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class TMSimulator {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 		//The file name is passed as an argument
 		String fileName = args[0];
 		File file = new File(fileName);
@@ -23,25 +26,58 @@ public class TMSimulator {
             String lastLine = "";
             int counter = 0;
 
-			Scanner scan = new Scanner(file);
 
-            while((currLine = scan.nextLine().trim()) != null){
-                if(counter == 0){
-                    //the first line is the number of states in the TM
-                    numStates = Integer.parseInt(currLine);
-                }else if(counter == 1){
-                    //the second line is the number of symbols in the language
-                    symbols = Integer.parseInt(currLine);
-                }else if(counter > 1){
-                    //Add
+		BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String next, line = reader.readLine();
+            for (boolean first = true, last = (line == null); !last; first = false, line = next) {
+                last = ((next = reader.readLine()) == null);
+				
+                if (first) {
+                    System.out.println("Number of states line: " + line);
+					numStates = Integer.valueOf(line);
+					counter = 1;
+                } else if (last) {
+                    System.out.println("string line: " + line);
+					lastLine = line;
+					string = line;
+                } else {
+					if(counter == 1){
+						System.out.println("symbols line: " + line);
+						symbols = Integer.valueOf(line);
+						counter = 0;
+					}else{
+						System.out.println("transition line: " + line);
 
-
+					}
+                    
                 }
-                System.out.println(currLine);
-                lastLine = currLine;
-                counter++;
             }
-            string = lastLine;
+        } finally {
+            if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
+        }
+
+			// Scanner scan = new Scanner(file);
+
+            // while((currLine = scan.nextLine().trim()) != null){
+            //     if(counter == 0){
+            //         //the first line is the number of states in the TM
+            //         numStates = Integer.parseInt(currLine);
+            //     }else if(counter == 1){
+            //         //the second line is the number of symbols in the language
+            //         symbols = Integer.parseInt(currLine);
+            //     }else if(counter > 1){
+            //         //Add
+
+
+            //     }
+            //     System.out.println(currLine);
+            //     lastLine = currLine;
+            //     counter++;
+            // }
+			// System.out.println(lastLine);
+            // string = lastLine;
 
             
             // //the second line is the number of symbols in the language
@@ -74,7 +110,7 @@ public class TMSimulator {
 			// 	char[] tran = tk.nextToken().toCharArray();
 			// 	tm.addTransition(String.valueOf(tran[0]), tran[1], String.valueOf(tran[2]));
 			// }
-			scan.close();
+			// scan.close();
 		} else {
 			System.err.println(file + " does not exists - please check the file path");
 		}
