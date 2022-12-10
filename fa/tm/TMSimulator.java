@@ -55,19 +55,21 @@ public class TMSimulator {
 
 					//The number of transition lines is the number of states - 1 times the number of symbols + 1
 					}else if(currLine > 1 && currLine < numTransitionLines + 2) {
+
 							if(init == false){
 								for(int i = 0; i < numStates; i++){
 									if(i == 0){
-										tm.addStartState(Integer.toString(currState));
+										tm.addStartState(Integer.toString(i));
 										System.out.println("Start");
 									}else if(i == numStates - 1){
-										tm.addFinalState(Integer.toString(currState));
+										tm.addFinalState(Integer.toString(i));
 										System.out.println("End");
 									}else{
-										tm.addState(Integer.toString(currState));
+										tm.addState(Integer.toString(i));
 										System.out.println("Middle");
 									}
 								}
+
 								init = true;
 							}
 							
