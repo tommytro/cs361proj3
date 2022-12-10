@@ -36,7 +36,6 @@ public class TMSimulator {
 					//Takes first line as the number of states
 					if(currLine == 0) {
 						last = ((next = reader.readLine()) == null);
-						System.out.println("Number of states line: " + line);
 						numStates = Integer.valueOf(line);
 						currLine++;
 						line = next;
@@ -44,7 +43,6 @@ public class TMSimulator {
 					//Second line which is the number of symbols in the machine (including 0)
 					}else if(currLine == 1){
 						last = ((next = reader.readLine()) == null);
-						System.out.println("symbols line: " + line);
 						numSymbols = Integer.valueOf(line);
 						numTransitionLines = (numStates - 1)*(numSymbols+1);
 						currLine++;
@@ -57,13 +55,10 @@ public class TMSimulator {
 								for(int i = 0; i < numStates; i++){
 									if(i == 0){
 										tm.addStartState(Integer.toString(i));
-										System.out.println("Start");
 									}else if(i == numStates - 1){
 										tm.addFinalState(Integer.toString(i));
-										System.out.println("End");
 									}else{
 										tm.addState(Integer.toString(i));
-										System.out.println("Middle");
 									}
 								}
 
@@ -74,8 +69,7 @@ public class TMSimulator {
 								
 								//add transition using currState as the state to add to
 								String[] splitString = line.split(",", 0);
-
-								System.out.println("transition on " + symb + " for state " + currState + " is " + line);
+								
 								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection'
 								tm.addTransition(currState, symb, splitString[0], Integer.valueOf(splitString[1]), splitString[2]);
 	
@@ -90,10 +84,8 @@ public class TMSimulator {
 					//If there is an extra line this is the string line
 					}else if(currLine >= numTransitionLines + 2){ 
 							last = ((next = reader.readLine()) == null);
-							System.out.println("string line: " + line);
 							string = line;
 					}else{
-							System.out.println("no string given");
 							//string = "000";
 					}
 				}
@@ -107,7 +99,7 @@ public class TMSimulator {
 				tm.buildTape();
 			}
 			
-			System.out.println(tm.accepts());
+			tm.accepts();
 
 		} else {
 			System.err.println(file + " does not exists - please check the file path");

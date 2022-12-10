@@ -1,7 +1,8 @@
 package fa.tm;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.LinkedList;
+
 /**
  * Implementation of a Turing Machine for project 3
  * @author Tommy Trovinger & Josh Fenske
@@ -10,13 +11,13 @@ public class TM {
     private Set<TMState> states;
     private TMState start;
     // private Set<Character> transitionChar;
-	private LinkedList<Integer> tape;
+	private ArrayList<Integer> tape;
 	private int pos = 0;
 
     public TM(){
         states = new LinkedHashSet<>();
         // transitionChar = new LinkedHashSet<>();
-		tape = new LinkedList<Integer>();
+		tape = new ArrayList<Integer>();
     }
    
 	public void buildTape(String string){
@@ -113,47 +114,35 @@ public class TM {
     public Boolean accepts() {
 		Boolean accepts = false;
 		TMState currState = start;
-		int incrementor = 0;
 		//iterate over the chars
 		while(accepts == false){
 			
-			System.out.println("Num of runs: " + incrementor);
 			int tapeChar = tape.get(pos);
 			int writeSymb = currState.getWriteSymb(tapeChar);
 			char dir = currState.getDirection(tapeChar);
 			tape.set(pos, writeSymb);
 
 			currState = currState.getTo(tapeChar);
-			System.out.println("current state: " + currState);
 			
 			if(dir == 'L'){
-				System.out.println("Moving L");
 				if(pos - 1 < 0){
-					tape.addFirst(0);
-					incrementor++;
+					tape.add(0, 0);
 					pos = 0;
 				}else{
 					pos--;
 				}
-			}else if(dir == 'R'){
-				System.out.println("Moving R");
+			}else{
 				if(pos + 1 >= tape.size()){
-					tape.addLast(0);
-					incrementor++;
+					tape.add(0);
 				}else{
 
 				}
 				pos++;
-			}else{
-				System.out.println("No direction");
 			}
-			System.out.println("Pos " + pos);
-
-			System.out.println(tape);
 
 			if(currState.isFinal() == true){
 				accepts = true;
-				System.out.println(this.toString());
+				System.out.println(toString());
 				break;
 			}
 
