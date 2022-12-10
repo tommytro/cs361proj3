@@ -63,10 +63,11 @@ public class TMSimulator {
 							}
 
 							for(int symb = 0; symb < numSymbols + 1; symb++){
-								System.out.println("transition on " + symb + " for state " + currState + " is " + line);
-								//add transition using currState as the state to add to
-								String[] splitString = line.split("[,], 0");
 								
+								//add transition using currState as the state to add to
+								String[] splitString = line.split(",", 0);
+
+								System.out.println("transition on " + symb + " for state " + currState + " is " + line);
 								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection
 								tm.addTransition(currState, symb, splitString[0], splitString[1], splitString[2]);
 
