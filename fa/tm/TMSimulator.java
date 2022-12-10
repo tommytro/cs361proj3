@@ -28,6 +28,8 @@ public class TMSimulator {
 
 
 			BufferedReader reader = null;
+
+			//Reads text file
 			try {
 				reader = new BufferedReader(new FileReader(file));
 				String next, line = reader.readLine();
