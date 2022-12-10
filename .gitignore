@@ -4,3 +4,6 @@ TMSimulator.class
 fa/tm/TM.class
 fa/tm/TMState.class
 fa/tm/TMTransition.class
+fa/FAInterface.class
+fa/State.class
+fa/FAInterface.class
