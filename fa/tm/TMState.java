@@ -6,13 +6,11 @@ import java.util.HashMap;
 import fa.State;
 
 /**
- * Jan 19, 2017
- * Implementation of a DFA state, which
- * mainly contains the information of its
- * neighboring states.
- * @author elenasherman
- *
+ * Date 12/9/22
+ * Simulator of a Turing Machine for project 3
+ * @author Tommy Trovinger & Josh Fenske
  */
+
 public class TMState extends State{
 	
 

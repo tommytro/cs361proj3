@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
+ * Date 12/9/22
  * Implementation of a Turing Machine for project 3
  * @author Tommy Trovinger & Josh Fenske
  */
