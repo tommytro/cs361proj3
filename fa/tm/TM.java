@@ -68,7 +68,7 @@ public class TM {
 		}
 	}
 
-    public void addTransition(int currState, String goTo, String writeChar, String moveDir){
+    public void addTransition(int currState, int onSymb, String goTo, String writeChar, String moveDir){
 		TMState from = checkIfExists(String.valueOf(currState));
 		TMState to = checkIfExists(goTo);
 		if(from == null){
@@ -79,7 +79,7 @@ public class TM {
 			System.exit(2);
 		}
 		
-		from.addTransition((int)currState, Integer.valueOf(goTo), writeChar.charAt(0), moveDir.charAt(0));
+		from.addTransition(onSymb, to, writeChar.charAt(0), moveDir.charAt(0));
 
 		if(!transitionChar.contains(currState)){
 			transitionChar.add((char)currState);

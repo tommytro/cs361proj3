@@ -17,7 +17,7 @@ public class TMState extends State{
 	
 
 	private ArrayList<TMTransition> delta = new ArrayList<TMTransition>();//delta
-	private boolean isFinal;//remembers its type
+	private boolean isFinal; //remembers its type
 	
 	/**
 	 * Default constructor
@@ -60,8 +60,8 @@ public class TMState extends State{
 	 * @param writeChar
 	 * @param moveDir
 	 */
-	public void addTransition(int currState, int toState, char writeChar, char moveDir){
-		delta.add(new TMTransition(currState, toState, writeChar, moveDir));
+	public void addTransition(int onSymb, TMState toState, char writeChar, char moveDir){
+		delta.add(new TMTransition(onSymb, toState, writeChar, moveDir));
 	}
 	
 	/**
@@ -71,7 +71,14 @@ public class TMState extends State{
 	 * @return the new state 
 	 */
 	public TMState getTo(int symb){
-		return delta.get(symb);                                      //fix
+		TMState nextState = null;
+		for(TMTransition transition : delta){
+			if(transition.getTransSymb() == symb){
+				nextState = transition.getNextState();
+				break;
+			}
+		}
+		return nextState;
 	}
 	
 	

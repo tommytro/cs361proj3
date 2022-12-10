@@ -4,8 +4,8 @@ package fa.tm;
  * @author Tommy Trovinger & Josh Fenske
  */
 public class TMTransition {
-    private int currState;
-    private int nextState;
+    private int transSymb;
+    private TMState nextState;
     private char writeSymb;
     private char moveDir;
     
@@ -16,18 +16,34 @@ public class TMTransition {
      * @param writeSymb
      * @param moveDir
      */
-    public TMTransition(int currState, int nextState, char writeSymb, char moveDir) {
-        this.setCurrState(currState);
+    public TMTransition(int transSymb, TMState nextState, char writeSymb, char moveDir) {
+        this.setTransSymb(transSymb);
         this.setNextState(nextState);
         this.setWrite(writeSymb);
         this.setDir(moveDir);
     }
 
     /**
+     * Set transition symbol
+     * @param transSymb
+     */
+    public void setTransSymb(int transSymb){
+        this.transSymb = transSymb;
+    }
+
+    /**
+     * Get transition symbol
+     * @param transSymb
+     */
+    public int getTransSymb(){
+        return this.transSymb;
+    }
+
+    /**
      * Set next state
      * @param nextState int
      */
-    public void setNextState(int nextState) {
+    public void setNextState(TMState nextState) {
         this.nextState = nextState;
     }
 
@@ -35,7 +51,7 @@ public class TMTransition {
      * get the next state
      * @return int
      */
-    public int getNextState() {
+    public TMState getNextState() {
         return nextState;
     }
 
@@ -73,28 +89,12 @@ public class TMTransition {
     public char getDir() {
         return moveDir;
     }
-
-    /**
-     * set currState
-     * @param int value of state
-     */
-    public void setCurrState(int currState) {
-        this.currState = currState;
-    }
-
-    /**
-     * get currState
-     * @return int of currState number
-     */
-    public int getCurrState() {
-        return currState;
-    }
     
-    /**
-     * Returns details of current transition
-     * @return string
-     */
-    public String toString() {
-        return currState + "," + nextState + "," + writeSymb + "," + moveDir;
-    }
+    // /**
+    //  * Returns details of current transition
+    //  * @return string
+    //  */
+    // public String toString() {
+    //     return currState + "," + nextState + "," + writeSymb + "," + moveDir;
+    // }
 }

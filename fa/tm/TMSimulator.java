@@ -54,14 +54,22 @@ public class TMSimulator {
 
 					//The number of transition lines is the number of states - 1 times the number of symbols + 1
 					}else if(currLine > 1 && currLine < numTransitionLines+2) {
-							for(int i = 0; i < numSymbols + 1; i++){
-								System.out.println("transition " + (i+1) + " for state " + currState + " is " + line);
+							if(currState == 0){
+								tm.addStartState(Integer.toString(currState));
+							}else if(currState == numStates - 1){
+								tm.addFinalState(Integer.toString(currState));
+							}else{
+								tm.addState(Integer.toString(currState));
+							}
+
+							for(int symb = 0; symb < numSymbols + 1; symb++){
+								System.out.println("transition on " + symb + " for state " + currState + " is " + line);
 								//add transition using currState as the state to add to
 								String[] splitString = line.split("[,], 0");
 								
 								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection
-								tm.addTransition(currState, splitString[0], splitString[1], splitString[2]);
-								
+								tm.addTransition(currState, symb, splitString[0], splitString[1], splitString[2]);
+
 								last = ((next = reader.readLine()) == null);
 								line = next;
 								currLine++;
@@ -75,7 +83,8 @@ public class TMSimulator {
 							string = line;
 							tm.addString(string);
 					}
-				}     
+				}
+				// tm.addFinalState(fileName);     
 			} finally {
 				if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
 			}
