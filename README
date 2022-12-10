@@ -1,0 +1,39 @@
+# Project 3: Turing Machine Simulation
+
+* Author: Tommy Trovinger, Josh Fenske
+* Class: CS361
+* Semester: Fall 2022 
+
+## Overview
+
+This Java application Simulates a turing machine using states provided in the "tests" folder.
+
+## Reflection
+
+- What worked well and what was a struggle? 
+  - We struggled with casting variables in a variety of scenarios. Due to a messy implementation we struggled to track down specific issues.
+- What techniques did you use to make your code easy to debug and modify?
+  - Print statements. A lot of them. We also began pair programming using vs-code which greatly improved our workflow. 
+- What would you change about your design process?
+  - Use an array list from the start.
+- If you could go back in time, what would you tell yourself about doing this project?
+  - Design with efficiency in mind. Originally we used a linked list which was decent but was magnitudes slower than our final itteration.
+
+## Compiling and Using
+
+To compile, execute the following command in the main project directory:
+```
+$ javac .\fa\FAInterface.java .\fa\State.java .\fa\tm\TM.java .\fa\tm\TMSimulator.java .\fa\tm\TMState.java .\fa\tm\TMTransition.java
+```
+
+Run the compiled class with the command:
+```
+$ java fa.tm.TMSimulator .\tests\YOURFILEHERE
+```
+
+The program will print the completed tape to the terminal.
+
+## Sources used
+
+https://docs.oracle.com/javase/8/docs/
+Project 1 Files
