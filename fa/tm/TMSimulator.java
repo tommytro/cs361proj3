@@ -20,13 +20,10 @@ public class TMSimulator {
 			TM tm = new TM();
             int numStates = 0;
             int numSymbols = 0;
-            int acceptStates = 0;
             String string = "";
 			int numTransitionLines = 0;
-            int counter = 0;
 			int currState = 0;
 			int currLine = 0;
-			int outOf = 0;
 			Boolean init = false;
 
 
@@ -106,5 +103,7 @@ public class TMSimulator {
 		} else {
 			System.err.println(file + " does not exists - please check the file path");
 		}
+
+
 	}
 }
