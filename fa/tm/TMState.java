@@ -35,7 +35,11 @@ public class TMState extends State{
 		initDefault(name);
 		this.isFinal = true;
 	}
-	
+
+	/**
+	 * Initializes the default name for the state
+	 * @param name
+	 */
 	private void initDefault(String name ){
 		this.name = name;
 	}
@@ -77,7 +81,11 @@ public class TMState extends State{
 		}
 		return nextState;
 	}
-	
+	/**
+	 * a method to get the symbol to be written on the tape after this transition
+	 * @param symb
+	 * @return the symbol to be written on the tape
+	 */
 	public int getWriteSymb(int symb){
 		int writeSymb = 0;
 		//System.out.println(delta);
@@ -89,7 +97,11 @@ public class TMState extends State{
 		}
 		return writeSymb;
 	}
-
+	/**
+	 * a method to get the direction the tape head will move
+	 * @param symb
+	 * @return the direction on which to move the pointer on the tape
+	 */
 	public char getDirection(int symb){
 		char dir = ' ';
 		for(TMTransition transition : delta){

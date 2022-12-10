@@ -21,6 +21,10 @@ public class TM {
 		tape = new ArrayList<Integer>();
     }
    
+	/**
+	 * Builds the tape using a string, or constructs a blank tape if no input string
+	 * @param string
+	 */
 	public void buildTape(String string){
 		char[] input = string.toCharArray();
 		for(char ch : input){
@@ -34,7 +38,7 @@ public class TM {
 
 	}
 	/**
-	 * 
+	 * adds a starting state to the TM
 	 * @param name
 	 */
     public void addStartState(String name){
@@ -70,6 +74,11 @@ public class TM {
 		states.add(s);
 	}
 
+	/**
+	 * A way to check if a state exists in the TM
+	 * @param name
+	 * @return the desired state if it exists in the machine
+	 */
     private TMState checkIfExists(String name){
 		TMState ret = null;
 		for(TMState s : states){
@@ -81,6 +90,10 @@ public class TM {
 		return ret;
 	}
 
+	/**
+	 * Adds a specified state to the machine as a final (halting) state
+	 * @param name
+	 */
     public void addFinalState(String name){
 		TMState s = checkIfExists(name);
 		if( s == null){
@@ -91,6 +104,14 @@ public class TM {
 		}
 	}
 
+	/**
+	 * Adds a transition to a state
+	 * @param currState the state the transition is on
+	 * @param onSymb the symbol we transition with
+	 * @param goTo the state to move to
+	 * @param writeChar the character that is written on the tape
+	 * @param moveDir the direction the head moves along the tape
+	 */
     public void addTransition(int currState, int onSymb, String goTo, int writeChar, String moveDir){
 		TMState from = checkIfExists(String.valueOf(currState));
 		TMState to = checkIfExists(goTo);
@@ -104,7 +125,10 @@ public class TM {
 		
 		from.addTransition(onSymb, to, writeChar, moveDir.charAt(0));
 	}
-
+	/**
+	 * 
+	 * @return the current state of the TMs tape
+	 */
     public String toString(){
 		String string = "";
 		for(int i : tape){
@@ -112,7 +136,10 @@ public class TM {
 		}
 		return string;
 	}
-
+	/**
+	 * Runs the TM, starting at the start state and moving through the 
+	 * different states depending on the tape
+	 */
     public void run() {
 		Boolean halts = false;
 		TMState currState = start;
@@ -151,11 +178,15 @@ public class TM {
 			
 		}
 	}
-
+	/**
+	 * @return returns a set of the states of the machine
+	 */
     public Set<TMState> getStates() {
 		return states;
 	}
-
+	/**
+	 * @return Returns a set of the final states of the machine
+	 */
 	public Set<TMState> getFinalStates() {
 		Set<TMState> ret = new LinkedHashSet<TMState>();
 		for(TMState s : states){
@@ -166,16 +197,22 @@ public class TM {
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @return returns the starting state of the machine
+	 */
 	public TMState getStartState() {
 		return start;
 	}
 
+	/**
+	 * gets the next state based on our current state and the tape input
+	 * @param from the state we move from
+	 * @param onSymb the symbol we move on
+	 * @return the state we will move to based on the current state and input from the tape
+	 */
 	public TMState getToState(TMState from, char onSymb) {
 		return from.getTo(onSymb);
 	}
-
-	// public Set<Character> getABC() {
-	// 	return transitionChar;
-	// }
 }
 
