@@ -95,14 +95,21 @@ public class TMSimulator {
 							last = ((next = reader.readLine()) == null);
 							System.out.println("string line: " + line);
 							string = line;
+					}else{
+							System.out.println("no string given");
+							//string = "000";
 					}
 				}
 				    
 			} finally {
 				if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
 			}
-
-			tm.buildTape(string);
+			if(string != ""){
+				tm.buildTape(string);
+			}else{
+				tm.buildTape();
+			}
+			
 			System.out.println(tm.accepts());
 
 		} else {

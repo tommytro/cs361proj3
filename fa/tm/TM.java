@@ -26,6 +26,11 @@ public class TM {
 		}
 		//System.out.println(tape);
 	}
+	public void buildTape(){
+
+		tape.add(0);
+
+	}
 
     public void addStartState(String name){
         TMState s = checkIfExists(name);
@@ -108,13 +113,15 @@ public class TM {
     public Boolean accepts() {
 		Boolean accepts = false;
 		TMState currState = start;
+		int incrementor = 0;
 		//iterate over the chars
 		while(accepts == false){
-
+			
+			System.out.println("Num of runs: " + incrementor);
 			int tapeChar = tape.get(pos);
 			int writeSymb = currState.getWriteSymb(tapeChar);
 			char dir = currState.getDirection(tapeChar);
-			tape.add(pos, writeSymb);
+			tape.set(pos, writeSymb);
 
 			currState = currState.getTo(tapeChar);
 			System.out.println("current state: " + currState);
@@ -122,16 +129,25 @@ public class TM {
 			if(dir == 'L'){
 				System.out.println("Moving L");
 				if(pos - 1 < 0){
+					tape.addFirst(0);
+					incrementor++;
 					pos = 0;
 				}else{
 					pos--;
 				}
 			}else if(dir == 'R'){
 				System.out.println("Moving R");
+				if(pos + 1 >= tape.size()){
+					tape.addLast(0);
+					incrementor++;
+				}else{
+
+				}
 				pos++;
 			}else{
 				System.out.println("No direction");
 			}
+			System.out.println("Pos " + pos);
 
 			System.out.println(tape);
 
