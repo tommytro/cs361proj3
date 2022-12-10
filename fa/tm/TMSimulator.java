@@ -109,7 +109,7 @@ public class TMSimulator {
 			}
 			
 			//runs the TM
-			tm.accepts();
+			tm.run();
 
 		//outputs error if there is no file on the file path given
 		} else {
