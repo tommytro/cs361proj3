@@ -6,7 +6,7 @@ package fa.tm;
 public class TMTransition {
     private int transSymb;
     private TMState nextState;
-    private char writeSymb;
+    private int writeSymb;
     private char moveDir;
     
     /**
@@ -16,7 +16,7 @@ public class TMTransition {
      * @param writeSymb
      * @param moveDir
      */
-    public TMTransition(int transSymb, TMState nextState, char writeSymb, char moveDir) {
+    public TMTransition(int transSymb, TMState nextState, int writeSymb, char moveDir) {
         this.setTransSymb(transSymb);
         this.setNextState(nextState);
         this.setWrite(writeSymb);
@@ -61,7 +61,7 @@ public class TMTransition {
      * 
      * @param writeSymbol An integer to write on the tape.
      */
-    public void setWrite(char writeSymb) {
+    public void setWrite(int writeSymb) {
         this.writeSymb = writeSymb;
     }
 
@@ -77,9 +77,9 @@ public class TMTransition {
      * Set Direction L or R
      * @param L/R
      */
-    public void setDir(char moveDir) {
-        if (moveDir == 'L' || moveDir == 'R')
-            this.moveDir = moveDir;
+    public void setDir(char toMove) {
+        if (toMove == 'L' || toMove == 'R')
+            this.moveDir = toMove;
     }
 
     /**

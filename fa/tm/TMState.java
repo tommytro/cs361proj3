@@ -17,7 +17,7 @@ public class TMState extends State{
 	
 
 	private ArrayList<TMTransition> delta = new ArrayList<TMTransition>();//delta
-	private boolean isFinal; //remembers its type
+	private Boolean isFinal = false; //remembers its type
 	
 	/**
 	 * Default constructor
@@ -25,7 +25,7 @@ public class TMState extends State{
 	 */
 	public TMState(String name){
 		initDefault(name);
-		isFinal = false;
+		this.isFinal = false;
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class TMState extends State{
 	 */
 	public TMState(String name, boolean isFinal){
 		initDefault(name);
-		this.isFinal = isFinal;
+		this.isFinal = true;
 	}
 	
 	private void initDefault(String name ){
@@ -57,11 +57,11 @@ public class TMState extends State{
 	 * Add the transition from <code> this </code> object
 	 * @param onSymb the alphabet symbol
 	 * @param toState to DFA state
-	 * @param writeChar
+	 * @param writeSymb
 	 * @param moveDir
 	 */
-	public void addTransition(int onSymb, TMState toState, char writeChar, char moveDir){
-		delta.add(new TMTransition(onSymb, toState, writeChar, moveDir));
+	public void addTransition(int onSymb, TMState toState, int writeSymb, char moveDir){
+		delta.add(new TMTransition(onSymb, toState, writeSymb, moveDir));
 	}
 	
 	/**
@@ -81,5 +81,27 @@ public class TMState extends State{
 		return nextState;
 	}
 	
+	public int getWriteSymb(int symb){
+		int writeSymb = 0;
+		//System.out.println(delta);
+		for(TMTransition transition : delta){
+			if(transition.getTransSymb() == symb){
+				writeSymb = transition.getWrite();
+				break;
+			}
+		}
+		return writeSymb;
+	}
+
+	public char getDirection(int symb){
+		char dir = ' ';
+		for(TMTransition transition : delta){
+			if(transition.getTransSymb() == symb){
+				dir = transition.getDir();
+				break;
+			}
+		}
+		return dir;
+	}
 	
 }
