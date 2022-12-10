@@ -20,7 +20,7 @@ public class TMTransition {
         this.setCurrState(currState);
         this.setNextState(nextState);
         this.setWrite(writeSymb);
-        this.setDirection(moveDir);
+        this.setDir(moveDir);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TMTransition {
      * 
      * @param writeSymbol An integer to write on the tape.
      */
-    public void setWrite(int writeSymb) {
+    public void setWrite(char writeSymb) {
         this.writeSymb = writeSymb;
     }
 
@@ -61,7 +61,7 @@ public class TMTransition {
      * Set Direction L or R
      * @param L/R
      */
-    public void setDirection(char moveDir) {
+    public void setDir(char moveDir) {
         if (moveDir == 'L' || moveDir == 'R')
             this.moveDir = moveDir;
     }
@@ -70,7 +70,7 @@ public class TMTransition {
      * get Direction L or R
      * @return direction L or R
      */
-    public char getDirection() {
+    public char getDir() {
         return moveDir;
     }
 
@@ -95,6 +95,6 @@ public class TMTransition {
      * @return string
      */
     public String toString() {
-        return currState + "," + nextState + "," + writeSymb + "," + direction;
+        return currState + "," + nextState + "," + writeSymb + "," + moveDir;
     }
 }
