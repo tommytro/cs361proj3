@@ -72,10 +72,10 @@ public class TM {
 		TMState from = checkIfExists(String.valueOf(currState));
 		TMState to = checkIfExists(goTo);
 		if(from == null){
-			System.err.println("ERROR: No TM state exists with name " + currState);
+			System.err.println("ERROR: No TM from state exists with name " + currState);
 			System.exit(2);
 		} else if (to == null){
-			System.err.println("ERROR: No TM state exists with name " + goTo);
+			System.err.println("ERROR: No TM to state exists with name " + goTo);
 			System.exit(2);
 		}
 		

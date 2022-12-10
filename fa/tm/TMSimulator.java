@@ -27,6 +27,7 @@ public class TMSimulator {
 			int currState = 0;
 			int currLine = 0;
 			int outOf = 0;
+			Boolean init = false;
 
 
 			BufferedReader reader = null;
@@ -53,28 +54,39 @@ public class TMSimulator {
 						line = next;
 
 					//The number of transition lines is the number of states - 1 times the number of symbols + 1
-					}else if(currLine > 1 && currLine < numTransitionLines+2) {
-							if(currState == 0){
-								tm.addStartState(Integer.toString(currState));
-							}else if(currState == numStates - 1){
-								tm.addFinalState(Integer.toString(currState));
-							}else{
-								tm.addState(Integer.toString(currState));
+					}else if(currLine > 1 && currLine < numTransitionLines + 2) {
+							if(init == false){
+								for(int i = 0; i < numStates; i++){
+									if(i == 0){
+										tm.addStartState(Integer.toString(currState));
+										System.out.println("Start");
+									}else if(i == numStates - 1){
+										tm.addFinalState(Integer.toString(currState));
+										System.out.println("End");
+									}else{
+										tm.addState(Integer.toString(currState));
+										System.out.println("Middle");
+									}
+								}
+								init = true;
 							}
-
+							
 							for(int symb = 0; symb < numSymbols + 1; symb++){
 								
 								//add transition using currState as the state to add to
 								String[] splitString = line.split(",", 0);
 
 								System.out.println("transition on " + symb + " for state " + currState + " is " + line);
-								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection
+								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection'
+								System.out.println(currState);
 								tm.addTransition(currState, symb, splitString[0], splitString[1], splitString[2]);
 
 								last = ((next = reader.readLine()) == null);
 								line = next;
 								currLine++;
 							}
+							
+
 							currState++;
 
 					//If there is an extra line this is the string line
