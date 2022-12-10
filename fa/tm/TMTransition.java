@@ -89,12 +89,4 @@ public class TMTransition {
     public char getDir() {
         return moveDir;
     }
-    
-    // /**
-    //  * Returns details of current transition
-    //  * @return string
-    //  */
-    // public String toString() {
-    //     return currState + "," + nextState + "," + writeSymb + "," + moveDir;
-    // }
 }

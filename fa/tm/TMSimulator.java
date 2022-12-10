@@ -9,6 +9,10 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * Simulator of a Turing Machine for project 3
+ * @author Tommy Trovinger & Josh Fenske
+ */
 
 public class TMSimulator {
     public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -53,6 +57,8 @@ public class TMSimulator {
 					//The number of transition lines is the number of states - 1 times the number of symbols + 1
 					}else if(currLine > 1 && currLine < numTransitionLines + 2) {
 
+							//Determines the line being read and creates the resulting state. 
+							//If it is the first or last line, it makes a start or final state. 
 							if(init == false){
 								for(int i = 0; i < numStates; i++){
 									if(i == 0){
@@ -67,6 +73,7 @@ public class TMSimulator {
 								init = true;
 							}
 							
+							//Adds the transitions to each state in the machine. There will be 1 transition for each transition symbol in the language.
 							for(int symb = 0; symb < numSymbols + 1; symb++){
 								
 								//add transition using currState as the state to add to
@@ -83,26 +90,28 @@ public class TMSimulator {
 
 							currState++;
 
-					//If there is an extra line this is the string line
+					//If there is an extra line it is the string to be used as input
 					}else if(currLine >= numTransitionLines + 2){ 
 							last = ((next = reader.readLine()) == null);
 							string = line;
-					}else{
-							//string = "000";
 					}
 				}
 				    
 			} finally {
 				if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
 			}
+
+			//Determines if there is a given input string. If not, run the machine with a blank tape.
 			if(string != ""){
 				tm.buildTape(string);
 			}else{
 				tm.buildTape();
 			}
 			
+			//runs the TM
 			tm.accepts();
 
+		//outputs error if there is no file on the file path given
 		} else {
 			System.err.println(file + " does not exists - please check the file path");
 		}

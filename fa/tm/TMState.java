@@ -40,7 +40,6 @@ public class TMState extends State{
 	
 	private void initDefault(String name ){
 		this.name = name;
-		//delta = new HashMap<Character, TMState>();               //fix
 	}
 	
 	

@@ -32,7 +32,10 @@ public class TM {
 		tape.add(0);
 
 	}
-
+	/**
+	 * 
+	 * @param name
+	 */
     public void addStartState(String name){
         TMState s = checkIfExists(name);
 		if(s == null){
@@ -43,6 +46,7 @@ public class TM {
 		}
 		start = s;
     }
+
     /**
      * Add a state to the set of states
      * @param name
@@ -56,6 +60,7 @@ public class TM {
 			System.out.println("WARNING: A state with name " + name + " already exists in the TM");
 		}
 	}
+
     /**
      * Alternate way to add to the state set. 
      * @param s
@@ -97,10 +102,6 @@ public class TM {
 		}
 		
 		from.addTransition(onSymb, to, writeChar, moveDir.charAt(0));
-
-		// if(!transitionChar.contains(currState)){
-		// 	transitionChar.add((char)currState);
-		// }
 	}
 
     public String toString(){
@@ -111,11 +112,11 @@ public class TM {
 		return string;
 	}
 
-    public Boolean accepts() {
-		Boolean accepts = false;
+    public void run() {
+		Boolean halts = false;
 		TMState currState = start;
 		//iterate over the chars
-		while(accepts == false){
+		while(halts == false){
 			
 			int tapeChar = tape.get(pos);
 			int writeSymb = currState.getWriteSymb(tapeChar);
@@ -141,15 +142,13 @@ public class TM {
 			}
 
 			if(currState.isFinal() == true){
-				accepts = true;
+				halts = true;
 				System.out.println(toString());
 				break;
 			}
 
 			
 		}
-		
-		return accepts;
 	}
 
     public Set<TMState> getStates() {
