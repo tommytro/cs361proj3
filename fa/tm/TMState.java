@@ -58,6 +58,7 @@ public class TMState extends State{
 	 * @param onSymb the alphabet symbol
 	 * @param toState to DFA state
 	 * @param writeChar
+	 * @param moveDir
 	 */
 	public void addTransition(int currState, int toState, char writeChar, char moveDir){
 		delta.add(new TMTransition(currState, toState, writeChar, moveDir));
@@ -69,12 +70,7 @@ public class TMState extends State{
 	 * @param symb - the alphabet symbol
 	 * @return the new state 
 	 */
-	public TMState getTo(char symb){
-		TMState ret = delta.get(symb);                                  //fix
-		if(ret == null){
-			 System.err.println("ERROR: DFAState.getTo(char symb) returns null on " + symb + " from " + name);
-			 System.exit(2);
-			}
+	public TMState getTo(int symb){
 		return delta.get(symb);                                      //fix
 	}
 	

@@ -79,7 +79,7 @@ public class TM {
 			System.exit(2);
 		}
 		
-		from.addTransition((char)currState, (char)goTo);
+		from.addTransition((int)currState, Integer.valueOf(goTo), writeChar.charAt(0), moveDir.charAt(0));
 
 		if(!transitionChar.contains(currState)){
 			transitionChar.add((char)currState);
