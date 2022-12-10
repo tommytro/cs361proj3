@@ -57,11 +57,11 @@ public class TMState extends State{
 	 * Add the transition from <code> this </code> object
 	 * @param onSymb the alphabet symbol
 	 * @param toState to DFA state
-	 * @param writeChar
+	 * @param writeSymb
 	 * @param moveDir
 	 */
-	public void addTransition(int onSymb, TMState toState, char writeChar, char moveDir){
-		delta.add(new TMTransition(onSymb, toState, writeChar, moveDir));
+	public void addTransition(int onSymb, TMState toState, int writeSymb, char moveDir){
+		delta.add(new TMTransition(onSymb, toState, writeSymb, moveDir));
 	}
 	
 	/**
@@ -83,6 +83,7 @@ public class TMState extends State{
 	
 	public int getWriteSymb(int symb){
 		int writeSymb = 0;
+		//System.out.println(delta);
 		for(TMTransition transition : delta){
 			if(transition.getTransSymb() == symb){
 				writeSymb = transition.getWrite();

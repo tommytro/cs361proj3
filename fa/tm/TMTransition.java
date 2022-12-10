@@ -77,9 +77,9 @@ public class TMTransition {
      * Set Direction L or R
      * @param L/R
      */
-    public void setDir(char moveDir) {
-        if (moveDir == 'L' || moveDir == 'R')
-            this.moveDir = moveDir;
+    public void setDir(char toMove) {
+        if (toMove == 'L' || toMove == 'R')
+            this.moveDir = toMove;
     }
 
     /**

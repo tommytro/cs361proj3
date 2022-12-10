@@ -79,7 +79,7 @@ public class TM {
 		}
 	}
 
-    public void addTransition(int currState, int onSymb, String goTo, String writeChar, String moveDir){
+    public void addTransition(int currState, int onSymb, String goTo, int writeChar, String moveDir){
 		TMState from = checkIfExists(String.valueOf(currState));
 		TMState to = checkIfExists(goTo);
 		if(from == null){
@@ -90,7 +90,7 @@ public class TM {
 			System.exit(2);
 		}
 		
-		from.addTransition(onSymb, to, writeChar.charAt(0), moveDir.charAt(0));
+		from.addTransition(onSymb, to, writeChar, moveDir.charAt(0));
 
 		// if(!transitionChar.contains(currState)){
 		// 	transitionChar.add((char)currState);
@@ -111,27 +111,37 @@ public class TM {
 		//iterate over the chars
 		while(accepts == false){
 
-			int tapeChar = Character.getNumericValue(tape.get(pos));
-			currState = currState.getTo(tapeChar);
+			int tapeChar = tape.get(pos);
 			int writeSymb = currState.getWriteSymb(tapeChar);
-			System.out.println(writeSymb);
+			char dir = currState.getDirection(tapeChar);
 			tape.add(pos, writeSymb);
+
+			currState = currState.getTo(tapeChar);
+			System.out.println("current state: " + currState);
 			
-			System.out.println("Currently at state: " + currState);
-			System.out.println(this.toString());
+			if(dir == 'L'){
+				System.out.println("Moving L");
+				if(pos - 1 < 0){
+					pos = 0;
+				}else{
+					pos--;
+				}
+			}else if(dir == 'R'){
+				System.out.println("Moving R");
+				pos++;
+			}else{
+				System.out.println("No direction");
+			}
+
+			System.out.println(tape);
 
 			if(currState.isFinal() == true){
 				accepts = true;
-				System.out.println("Currently at final state: " + currState);
 				System.out.println(this.toString());
+				break;
 			}
 
-			char dir = currState.getDirection(writeSymb);
-			if(dir == 'L'){
-				pos--;
-			}else{
-				pos++;
-			}
+			
 		}
 		
 		return accepts;

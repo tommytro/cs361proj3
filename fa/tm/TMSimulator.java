@@ -80,8 +80,8 @@ public class TMSimulator {
 
 								System.out.println("transition on " + symb + " for state " + currState + " is " + line);
 								//addTransition variables should be: fromState, toState, writeSymbol, moveDirection'
-								tm.addTransition(currState, symb, splitString[0], splitString[1], splitString[2]);
-
+								tm.addTransition(currState, symb, splitString[0], Integer.valueOf(splitString[1]), splitString[2]);
+	
 								last = ((next = reader.readLine()) == null);
 								line = next;
 								currLine++;
@@ -103,8 +103,7 @@ public class TMSimulator {
 			}
 
 			tm.buildTape(string);
-			System.out.println(tm.toString());
-			tm.accepts();
+			System.out.println(tm.accepts());
 
 		} else {
 			System.err.println(file + " does not exists - please check the file path");
