@@ -1,6 +1,7 @@
 package fa.tm;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.LinkedList;
 /**
  * Implementation of a Turing Machine for project 3
  * @author Tommy Trovinger & Josh Fenske
@@ -8,14 +9,24 @@ import java.util.Set;
 public class TM {
     private Set<TMState> states;
     private TMState start;
-    private Set<Character> transitionChar;
+    // private Set<Character> transitionChar;
+	private LinkedList<Integer> tape;
+	private int pos = 0;
 
     public TM(){
         states = new LinkedHashSet<>();
-        transitionChar = new LinkedHashSet<>();
+        // transitionChar = new LinkedHashSet<>();
+		tape = new LinkedList<Integer>();
     }
-
    
+	public void buildTape(String string){
+		char[] input = string.toCharArray();
+		for(char ch : input){
+			tape.add(Character.getNumericValue(ch));
+		}
+		//System.out.println(tape);
+	}
+
     public void addStartState(String name){
         TMState s = checkIfExists(name);
 		if(s == null){
@@ -81,32 +92,49 @@ public class TM {
 		
 		from.addTransition(onSymb, to, writeChar.charAt(0), moveDir.charAt(0));
 
-		if(!transitionChar.contains(currState)){
-			transitionChar.add((char)currState);
-		}
+		// if(!transitionChar.contains(currState)){
+		// 	transitionChar.add((char)currState);
+		// }
 	}
 
     public String toString(){
-
-		String s = "Q = { ";
-        //ADD MORE
-		return s;
+		String string = "";
+		for(int i : tape){
+			string = string + i;
+		}
+		return string;
 	}
 
-    public boolean accepts(String input) {
-		boolean ret = false;
-		char[] inputString = input.toCharArray();
+    public Boolean accepts() {
+		Boolean accepts = false;
 		TMState currState = start;
 		//iterate over the chars
-		if(!(inputString.length==1 && inputString[0] == 'e')){
-			for(char c : inputString){
-				currState = currState.getTo(c);
+		while(accepts == false){
+
+			int tapeChar = Character.getNumericValue(tape.get(pos));
+			currState = currState.getTo(tapeChar);
+			int writeSymb = currState.getWriteSymb(tapeChar);
+			System.out.println(writeSymb);
+			tape.add(pos, writeSymb);
+			
+			System.out.println("Currently at state: " + currState);
+			System.out.println(this.toString());
+
+			if(currState.isFinal() == true){
+				accepts = true;
+				System.out.println("Currently at final state: " + currState);
+				System.out.println(this.toString());
+			}
+
+			char dir = currState.getDirection(writeSymb);
+			if(dir == 'L'){
+				pos--;
+			}else{
+				pos++;
 			}
 		}
-		if(currState.isFinal()){
-			ret = true;
-		} 
-		return ret;
+		
+		return accepts;
 	}
 
     public Set<TMState> getStates() {
@@ -131,12 +159,8 @@ public class TM {
 		return from.getTo(onSymb);
 	}
 
-	public Set<Character> getABC() {
-		return transitionChar;
-	}
-
-
-    public void addString(String string) {
-    }
+	// public Set<Character> getABC() {
+	// 	return transitionChar;
+	// }
 }
 

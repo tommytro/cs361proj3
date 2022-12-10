@@ -95,16 +95,22 @@ public class TMSimulator {
 							last = ((next = reader.readLine()) == null);
 							System.out.println("string line: " + line);
 							string = line;
-							tm.addString(string);
 					}
 				}
-				// tm.addFinalState(fileName);     
+				    
 			} finally {
 				if (reader != null) try { reader.close(); } catch (IOException logOrIgnore) {}
 			}
 
+			tm.buildTape(string);
+			System.out.println(tm.toString());
+			tm.accepts();
+
 		} else {
 			System.err.println(file + " does not exists - please check the file path");
 		}
+
+		
+		
 	}
 }
